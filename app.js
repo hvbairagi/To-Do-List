@@ -3,6 +3,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const ejs = require("ejs");
 const _ = require("lodash");
 
 const app = express();
@@ -63,6 +64,10 @@ app.get("/", function(req, res) {
 
 });
 
+app.get("/about", function(req, res){
+  res.render("about");
+});
+
 app.get("/:customListName", function(req, res){
   const customListName = _.capitalize(req.params.customListName);
 
@@ -83,9 +88,6 @@ app.get("/:customListName", function(req, res){
       }
     }
   });
-
-
-
 });
 
 app.post("/", function(req, res){
@@ -127,12 +129,6 @@ app.post("/delete", function(req, res){
       }
     });
   }
-
-
-});
-
-app.get("/about", function(req, res){
-  res.render("about");
 });
 
 let port = process.env.PORT;
